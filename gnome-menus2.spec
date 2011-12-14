@@ -82,6 +82,9 @@ mv $RPM_BUILD_ROOT%{_sysconfdir}/xdg/menus $RPM_BUILD_ROOT%{_sysconfdir}/xdg/gno
 
 chmod 755 %buildroot%_libdir/python*/site-packages/GMenuSimpleEditor/*.py
 
+#gw some build nodes remove these automatically, some don't
+rm -f %buildroot%_libdir/lib*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -110,7 +113,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/lib*.so
 %_libdir/lib*.a
-%_libdir/lib*.la
 %_includedir/gnome-menus/
 %_libdir/pkgconfig/*.pc
 %_datadir/gir-1.0/GMenu-%api.gir
