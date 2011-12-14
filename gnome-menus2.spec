@@ -110,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/lib*.so
 %_libdir/lib*.a
+%_libdir/lib*.la
 %_includedir/gnome-menus/
 %_libdir/pkgconfig/*.pc
 %_datadir/gir-1.0/GMenu-%api.gir
