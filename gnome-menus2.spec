@@ -1,13 +1,14 @@
 %define major 2
 %define libname %mklibname gnome-menu %major
-%define libnamedev %mklibname -d gnome-menu
+%define libnamedev %mklibname -d gnome-menu %api
 %define api 2.0
+%define oname gnome-menus
 
 Summary: GNOME menu library
-Name: gnome-menus
+Name: gnome-menus2
 Version: 2.30.5
 Release: %mkrel 2
-Source0: http://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Source0: http://ftp.gnome.org/pub/GNOME/sources/%oname/%{oname}-%{version}.tar.bz2
 # (fc) 2.15.91-2mdv grab translation from menu-messages if not in upstream file
 Patch0: gnome-menus-2.27.92-l10n.patch
 # (fc) 2.16.0-2mdv unclutter preferences/settings menu
@@ -51,7 +52,6 @@ http://www.freedesktop.org/Standards/menu-spec
 Group: Development/C
 Summary: GNOME menu library development files
 Requires: %libname = %version
-Provides: libgnome-menu-devel = %version-%release
 Provides: %{name}-devel = %{version}-%{release}
 Obsoletes: %mklibname -d gnome-menu 2
 Conflicts: gir-repository < 0.6.5-8
@@ -62,7 +62,7 @@ Specification" from freedesktop.org:
 http://www.freedesktop.org/Standards/menu-spec
 
 %prep
-%setup -q
+%setup -q -n %oname-%version
 %patch0 -p1 -b .l10n
 %patch1 -p1 -b .uncluttermenu
 
@@ -71,11 +71,11 @@ http://www.freedesktop.org/Standards/menu-spec
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT %name.lang
+rm -rf $RPM_BUILD_ROOT %oname.lang
 %makeinstall_std
 # gw these produce rpmlint errors:
 rm -rf %buildroot%_datadir/locale/{io,be@latin,bn_IN,si,uz@cyrillic}
-%find_lang %name
+%find_lang %oname
 
 mkdir -p $RPM_BUILD_ROOT%_sysconfdir/xdg/gnome
 mv $RPM_BUILD_ROOT%{_sysconfdir}/xdg/menus $RPM_BUILD_ROOT%{_sysconfdir}/xdg/gnome
@@ -85,14 +85,8 @@ chmod 755 %buildroot%_libdir/python*/site-packages/GMenuSimpleEditor/*.py
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
 
-%files -f %name.lang
+%files -f %oname.lang
 %defattr(-,root,root)
 %doc README NEWS HACKING AUTHORS ChangeLog
 %_datadir/desktop-directories
@@ -101,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/xdg/gnome/menus/*
 %_bindir/*
 %_datadir/applications/*
-%_datadir/%{name}
+%_datadir/%{oname}
 
 %files -n python-%{name}
 %defattr(-,root,root)
@@ -115,7 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %libnamedev
 %defattr(-,root,root)
 %_libdir/lib*.so
-%_libdir/lib*.la
 %_libdir/lib*.a
 %_includedir/gnome-menus/
 %_libdir/pkgconfig/*.pc
