@@ -1,0 +1,55 @@
+diff -p -up gnome-menus-2.23.1/layout/settings.menu.uncluttermenu gnome-menus-2.23.1/layout/settings.menu
+--- gnome-menus-2.23.1/layout/settings.menu.uncluttermenu	2008-04-21 21:49:29.000000000 +0200
++++ gnome-menus-2.23.1/layout/settings.menu	2008-04-22 12:23:12.000000000 +0200
+@@ -39,11 +39,47 @@
+   <Menu>
+     <Name>Administration</Name>
+     <Directory>Settings-System.directory</Directory>
++      <Layout>
++        <Filename>mandriva-drakconf.desktop</Filename>
++        <Separator/>
++        <Merge type="all"/>
++      </Layout>
+     <Include>
+-      <And>
+-        <Category>Settings</Category>
+-        <Category>System</Category>
+-      </And>
++	<And>
++            <!-- never show those, they are in preference menu -->
++            <Not>
++              <Category>GNOME</Category>
++            </Not>
++            <Category>HardwareSettings</Category>
++        </And>
++       <And>
++          <Or>
++            <Or>
++              <Category>GTK</Category>
++              <Category>X-MandrivaLinux-CrossDesktop</Category>
++            </Or>
++            <Not>
++              <Category>FileTools</Category>
++              <Category>FileSystem</Category>
++              <Category>Security</Category>
++              <Category>Applet</Category>
++              <Category>KDE</Category>
++              <Category>Qt</Category>
++            </Not>
++          </Or>
++          <Or>
++            <And>
++              <Category>System</Category>
++              <Not>
++                <Category>Emulator</Category>
++                <Category>TerminalEmulator</Category>
++              </Not>
++            </And>
++            <Category>Monitor</Category>
++          </Or>
++        </And>
++        <Category>PackageManager</Category>
++        <Category>Printing</Category>
+     </Include>
+   </Menu>     <!-- End System Settings -->
+ 
