@@ -13,7 +13,7 @@ Release:	5
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{oname}/%{oname}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-menus/%{url_ver}/%{oname}-%{version}.tar.bz2
 # (fc) 2.15.91-2mdv grab translation from menu-messages if not in upstream file
 Patch0:		gnome-menus-2.27.92-l10n.patch
 # (fc) 2.16.0-2mdv unclutter preferences/settings menu
