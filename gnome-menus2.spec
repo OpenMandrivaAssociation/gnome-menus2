@@ -9,7 +9,7 @@
 Summary:	GNOME menu library
 Name:		gnome-menus2
 Version:	2.30.5
-Release:	10
+Release:	11
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org
